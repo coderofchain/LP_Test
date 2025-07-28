@@ -13,9 +13,9 @@ namespace Core.Services.Products
 
         void DeleteAll();
 
-        Product Create(Guid id, string name, string description, string sku, decimal? price);
+        Product Create(Guid id, string name, string description, string sku, decimal? price, ProductTypes type);
 
-        void Update(Product product, string name, string description, string sku, decimal? price);
+        void Update(Product product, string name, string description, string sku, decimal? price, ProductTypes type);
 
         IEnumerable<Product> GetProducts(string name = null, string description = null, string sku = null, decimal? price = null);
 

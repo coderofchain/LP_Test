@@ -10,11 +10,13 @@ namespace WebApi.Models.Products
             Description = product.Description;
             Price = product.Price;
             Sku = product.Sku;
+            Type = new EnumData(product.Type);
         }
 
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal? Price { get; set; }
         public string Sku { get; set; }
+        public EnumData Type { get; set; }
     }
 }

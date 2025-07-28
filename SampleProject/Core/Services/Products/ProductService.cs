@@ -20,20 +20,21 @@ namespace Core.Services.Products
             _productRepository = productRepository;
         }
 
-        public Product Create(Guid id, string name, string description, string sku, decimal? price)
+        public Product Create(Guid id, string name, string description, string sku, decimal? price, ProductTypes type)
         {
             var product = _productFactory.Create(id);
-            Update(product, name, description, sku, price);
+            Update(product, name, description, sku, price, type);
             _productRepository.Save(product);
             return product;
         }
 
-        public void Update(Product product, string name, string description, string sku, decimal? price)
+        public void Update(Product product, string name, string description, string sku, decimal? price, ProductTypes type)
         {
             product.SetName(name);
             product.SetDescription(description);
             product.SetSku(sku);
             product.SetPrice(price);
+            product.SetType(type);
         }
 
         public void Delete(Product product)

@@ -10,6 +10,7 @@ namespace BusinessEntities
         private string _description;
         private decimal? _price;
         private string _sku;
+        private ProductTypes _type = ProductTypes.Non_Perishable;
 
         public string Name
         {
@@ -33,6 +34,12 @@ namespace BusinessEntities
         {
             get => _sku;
             private set => _sku = value;
+        }
+
+        public ProductTypes Type
+        {
+            get => _type;
+            private set => _type = value;
         }
 
         public void SetName(string name)
@@ -69,6 +76,10 @@ namespace BusinessEntities
                 throw new ArgumentNullException("Price was not provided.");
             }
             _price = price;
+        }
+        public void SetType(ProductTypes type)
+        {
+            _type = type;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace WebApi.Controllers
                 return DuplicateRecord();
             }
             // rename to CreateProduct
-            var product = _productService.Create(productId, model.Name, model.Description, model.Sku, model.Price);
+            var product = _productService.Create(productId, model.Name, model.Description, model.Sku, model.Price, model.Type);
             return Found(new ProductData(product));
         }
 
@@ -47,7 +47,7 @@ namespace WebApi.Controllers
             {
                 return DoesNotExist();
             }
-            _productService.Update(product, model.Name, model.Description, model.Sku, model.Price);
+            _productService.Update(product, model.Name, model.Description, model.Sku, model.Price, model.Type);
             return Found(new ProductData(product));
         }
 
@@ -85,15 +85,22 @@ namespace WebApi.Controllers
             return Found(new ProductData(product));
         }
 
-        // todo will add a storageType for 'perishible' vs. 'non-perishible' for filtering purposes
-        // and to enrich our response outputs a bit more.
         [Route("list/type")]
         [HttpGet]
         public HttpResponseMessage GetProductsByType(string type)
         {
-            // todo will add a filter here based on type
-            throw new NotImplementedException();
-        }
+            int value;
+            List<ProductData> products = new List<ProductData>();
 
+            if (int.TryParse(type, out value))
+            {
+                products = _productService.GetProducts()
+                               .Where(p => ((int)p.Type == (value)))
+                               .Select(q => new ProductData(q))
+                               .ToList();
+            }
+
+            return Found(products);
+        }
     }
 }

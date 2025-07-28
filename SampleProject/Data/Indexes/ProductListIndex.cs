@@ -20,6 +20,7 @@ namespace Data.Indexes
                                product.Sku,
                                product.Price
                            };
+            Index(x => x.Type, FieldIndexing.NotAnalyzed);
 
         }
     }

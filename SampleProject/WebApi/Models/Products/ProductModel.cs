@@ -12,6 +12,8 @@ namespace WebApi.Models.Products
         public decimal? Price { get; set; }
 
         public string Sku { get; set; }
+
+        public ProductTypes Type { get; set; }
     }
 
 }
