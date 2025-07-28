@@ -285,7 +285,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"A\",\r\n    \"description\": \"highest seller in kitchen appliances\",\r\n    \"sku\": \"2JU44829P2\",\r\n    \"price\": 9.99\r\n}",
+									"raw": "{\r\n    \"name\": \"A\",\r\n    \"description\": \"highest seller in kitchen appliances\",\r\n    \"sku\": \"2JU44829P2\",\r\n    \"type\": 1,\r\n    \"price\": 9.99\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -315,7 +315,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"B\",\r\n    \"description\": \"needs to be refrigerated within 24 hours\",\r\n    \"sku\": \"9RL52829Q2\",\r\n    \"price\": 42.49\r\n}",
+									"raw": "{\r\n    \"name\": \"B\",\r\n    \"description\": \"needs to be refrigerated within 24 hours\",\r\n    \"type\": 2,\r\n    \"sku\": \"9RL52829Q2\",\r\n    \"price\": 42.49\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -370,7 +370,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:49834/products/list/type?type=2",
+									"raw": "http://localhost:49834/products/list/type?type=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -384,7 +384,7 @@
 									"query": [
 										{
 											"key": "type",
-											"value": "2"
+											"value": "1"
 										}
 									]
 								}
@@ -439,7 +439,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"B (updated)\",\r\n    \"description\": \"needs to be refrigerated within 24 hours (limited demand)\",\r\n    \"sku\": \"9RL52829Q2\",\r\n    \"price\": 500.00\r\n}",
+									"raw": "{\r\n    \"name\": \"B (updated)\",\r\n    \"description\": \"needs to be refrigerated within 24 hours (limited demand)\",\r\n    \"sku\": \"9RL52829Q2\",\r\n    \"type\": 1,\r\n    \"price\": 500.00\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
