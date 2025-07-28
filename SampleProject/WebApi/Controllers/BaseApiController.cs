@@ -20,5 +20,10 @@ namespace WebApi.Controllers
         {
             return ControllerContext.Request.CreateResponse(HttpStatusCode.NotFound);
         }
+
+        public HttpResponseMessage DuplicateRecord()
+        {
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.Conflict, "A record with the same ID already exists, try using the Update method instead.");
+        }
     }
 }

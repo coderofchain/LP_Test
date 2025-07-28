@@ -1,9 +1,13 @@
-﻿using System;
+﻿using BusinessEntities;
+using Common.Extensions;
+using Core.Services.Users;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Web.Helpers;
 using System.Web.Http;
-using BusinessEntities;
-using Core.Services.Users;
+using System.Xml.Linq;
 using WebApi.Models.Users;
 
 namespace WebApi.Controllers
@@ -28,7 +32,14 @@ namespace WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage CreateUser(Guid userId, [FromBody] UserModel model)
         {
-            var user = _createUserService.Create(userId, model.Name, model.Email, model.Type, model.AnnualSalary, model.Tags);
+            //check for existing userIds before creating
+            var existingIds = _getUserService.GetUsers().Select(u => u.Id).ToList();
+            if (existingIds.Contains(userId))
+            {
+                return DuplicateRecord();
+            }
+
+            var user = _createUserService.Create(userId, model.Name, model.Email, model.Type, model.AnnualSalary, model.Tags, model.Age);
             return Found(new UserData(user));
         }
 
@@ -41,7 +52,7 @@ namespace WebApi.Controllers
             {
                 return DoesNotExist();
             }
-            _updateUserService.Update(user, model.Name, model.Email, model.Type, model.AnnualSalary, model.Tags);
+            _updateUserService.Update(user, model.Name, model.Email, model.Type, model.AnnualSalary, model.Tags, model.Age);
             return Found(new UserData(user));
         }
 
@@ -89,7 +100,12 @@ namespace WebApi.Controllers
         [HttpGet]
         public HttpResponseMessage GetUsersByTag(string tag)
         {
-            throw new NotImplementedException();
+            // Be wary of this as the user data grows, but for now its pretty good.
+            var users = _getUserService.GetUsers()
+                                      .Where(u => u.Tags.Contains(tag))
+                                      .Select(q => new UserData(q))
+                                      .ToList();
+            return Found(users);
         }
     }
 }

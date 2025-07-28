@@ -11,6 +11,7 @@ namespace WebApi.Models.Users
             Type = new EnumData(user.Type);
             MonthlySalary = user.MonthlySalary;
             Age = user.Age;
+            // assuming the tags are left out on purpose for the responses.
         }
 
         public string Name { get; set; }

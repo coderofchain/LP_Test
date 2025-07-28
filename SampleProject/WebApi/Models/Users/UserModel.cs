@@ -10,5 +10,6 @@ namespace WebApi.Models.Users
         public UserTypes Type { get; set; }
         public decimal? AnnualSalary { get; set; }
         public IEnumerable<string> Tags { get; set; }
+        public int Age { get; set; }
     }
 }
