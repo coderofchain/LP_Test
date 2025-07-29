@@ -14,25 +14,34 @@ namespace Core.Services.Orders
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IIdObjectFactory<Order> _orderFactory;
+        private readonly IIdObjectFactory<Product> _productFactory;
 
-        public OrderService(IIdObjectFactory<Order> orderFactory, IOrderRepository orderRepositry)
+        public OrderService(IIdObjectFactory<Order> orderFactory, IIdObjectFactory<Product> productFactory, IOrderRepository orderRepositry)
         {
             _orderFactory = orderFactory;
             _orderRepository = orderRepositry;
+            _productFactory = productFactory;
         }
 
         public Order Create(Guid id, string customer, string shippingAddress, IEnumerable<Product> orderedProducts)
         {
-            DateTime dt = DateTime.Today;
-            var formatted = dt.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
-            var orderDate = DateTime.ParseExact(formatted, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
             var order = _orderFactory.Create(id);
-            order.SetOrderDate(orderDate);
+            order.SetOrderDate(DateTime.Today);
 
             Update(order, customer, shippingAddress, orderedProducts);
             _orderRepository.Save(order);
             return order;
+        }
+
+        public Product Create(string name, string description, string sku, decimal? price, ProductTypes type)
+        {
+            var product = _productFactory.Create();
+            product.SetName(name);
+            product.SetDescription(description);
+            product.SetSku(sku);
+            product.SetPrice(price);
+            product.SetType(type);
+            return product;
         }
 
         public Order GetOrder(Guid orderId)
@@ -50,7 +59,7 @@ namespace Core.Services.Orders
             order.SetCustomer(customer);
             order.SetShippingAddress(shippingAddress);
             order.SetOrderedProducts(orderedProducts);
-            // todo add a SetUpdatedOrderDate to allow for date changes separate from the original order date.
+            // could add a SetUpdatedOrderDate to allow for date changes separate from the original order date.
         }
 
         public void Delete(Order order)

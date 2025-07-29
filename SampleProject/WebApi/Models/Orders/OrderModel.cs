@@ -1,6 +1,7 @@
 using BusinessEntities;
 using System;
 using System.Collections.Generic;
+using WebApi.Models.Products;
 
 namespace WebApi.Models.Orders
 {
@@ -8,7 +9,6 @@ namespace WebApi.Models.Orders
     {
         public string Customer { get; set; }
         public string ShippingAddress { get; set; }
-
-        public  IEnumerable<Product> OrderedProducts = new List<Product>();
+        public IEnumerable<ProductModel> OrderedProducts { get; set; }
     }
 }

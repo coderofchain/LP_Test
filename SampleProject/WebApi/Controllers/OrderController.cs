@@ -37,8 +37,15 @@ namespace WebApi.Controllers
             {
                 return DuplicateRecord();
             }
+
+            List<Product> orderedProducts = new List<Product>();
+            foreach(var product in model.OrderedProducts)
+            {
+                var p = _orderService.Create(product.Name, product.Description, product.Sku, product.Price, product.Type);
+                orderedProducts.Add(p);
+            }
             
-            var order = _orderService.Create(orderId, model.Customer, model.ShippingAddress, model.OrderedProducts);
+            var order = _orderService.Create(orderId, model.Customer, model.ShippingAddress, orderedProducts);
             return Found(new OrderData(order));
         }
 
@@ -51,7 +58,14 @@ namespace WebApi.Controllers
             {
                 return DoesNotExist();
             }
-            _orderService.Update(order, model.Customer, model.ShippingAddress, model.OrderedProducts);
+
+            List<Product> orderedProducts = new List<Product>();
+            foreach (var product in model.OrderedProducts)
+            {
+                var p = _orderService.Create(product.Name, product.Description, product.Sku, product.Price, product.Type);
+                orderedProducts.Add(p);
+            }
+            _orderService.Update(order, model.Customer, model.ShippingAddress, orderedProducts);
             return Found(new OrderData(order));
         }
 
@@ -98,12 +112,12 @@ namespace WebApi.Controllers
             return Found(orders);
         }
 
-        // allow the user to pass in a productId and see all orders relating to it
-        [Route("list/productOrders")]
+        // allow the user to pass in a product sku number and see all orders relating to that product
+        [Route("list/productSku")]
         [HttpGet]
-        public HttpResponseMessage GetOrdersByProduct(Guid productId)
+        public HttpResponseMessage GetOrdersByProduct(string sku)
         {
-            IEnumerable<Order> result = new List<Order>();
+            List<Order> result = new List<Order>();
             var orders = _orderService.GetOrders();
 
             // the dreaded nested loop here..would think about this some more and possibly change in the future
@@ -111,15 +125,15 @@ namespace WebApi.Controllers
             {
                 foreach(Product p in o.OrderedProducts)
                 {
-                    if(p.Id == productId)
+                    if(p.Sku.Equals(sku))
                     {
-                        result.Append(o);
+                        result.Add(o);
                         break;
                     }
                     
                 }
             }
-            return Found(orders);
+            return Found(result);
         }
 
         [Route("list/orderDate")]

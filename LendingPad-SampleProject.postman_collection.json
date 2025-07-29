@@ -466,7 +466,250 @@
 				},
 				{
 					"name": "Orders",
-					"item": []
+					"item": [
+						{
+							"name": "Create Order - A",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": \"John Stevenson\",\r\n    \"shippingAddress\": \"2232 Calhoun St. Apt. 54 Chicago, Illinois\",\r\n    \"orderedProducts\":\r\n    [\r\n        {\r\n            \"name\": \"A\",\r\n            \"description\": \"highest seller in kitchen appliances\",\r\n            \"sku\": \"2JU44829P2\",\r\n            \"type\": 1,\r\n            \"price\": 9.99\r\n        },\r\n        {\r\n            \"name\": \"B\",\r\n            \"description\": \"needs to be refrigerated within 24 hours\",\r\n            \"type\": 2,\r\n            \"sku\": \"9RL52829Q2\",\r\n            \"price\": 42.49\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:49834/orders/1422740e-6426-4c46-8445-3f5274a62424/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"1422740e-6426-4c46-8445-3f5274a62424",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Order - B",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": \"Ashley Roberts\",\r\n    \"shippingAddress\": \"942 Saratoga St. Tampa, Florida\",\r\n    \"orderedProducts\":\r\n    [\r\n        {\r\n            \"name\": \"C\",\r\n            \"description\": \"Top-rated highest reviews\",\r\n            \"sku\": \"9TU24824H2\",\r\n            \"type\": 1,\r\n            \"price\": 440.00\r\n        },\r\n        {\r\n            \"name\": \"D\",\r\n            \"description\": \"must be handled with care\",\r\n            \"type\": 2,\r\n            \"sku\": \"3PA54229Y2\",\r\n            \"price\": 1000.00\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:49834/orders/9422740e-6426-4c46-8445-3f5274a62424/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"9422740e-6426-4c46-8445-3f5274a62424",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetOrderByID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:49834/orders/id?id=1422740e-6426-4c46-8445-3f5274a62424",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1422740e-6426-4c46-8445-3f5274a62424"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteOrderByID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:49834/orders/1422740e-6426-4c46-8445-3f5274a62424/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"1422740e-6426-4c46-8445-3f5274a62424",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Clear Orders",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:49834/orders/clear",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"clear"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": \"Ashley Lewis Roberts\",\r\n    \"shippingAddress\": \"5302 Charles St. Orlando, Florida\",\r\n    \"orderedProducts\":\r\n    [\r\n        {\r\n            \"name\": \"E\",\r\n            \"description\": \"Needs to be replaced every 24 months\",\r\n            \"sku\": \"7TU14004O5\",\r\n            \"type\": 2,\r\n            \"price\": 58.99\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:49834/orders/9422740e-6426-4c46-8445-3f5274a62424/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"9422740e-6426-4c46-8445-3f5274a62424",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Orders",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:49834/orders/list/?customer=&shippingAddress=2232 Calhoun St. Apt. 54 Chicago, Illinois",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"list",
+										""
+									],
+									"query": [
+										{
+											"key": "customer",
+											"value": ""
+										},
+										{
+											"key": "shippingAddress",
+											"value": "2232 Calhoun St. Apt. 54 Chicago, Illinois"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetOrdersByProductSKU",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:49834/orders/list/productSku?sku=2JU44829P2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"list",
+										"productSku"
+									],
+									"query": [
+										{
+											"key": "sku",
+											"value": "2JU44829P2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Orders By Order Date",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:49834/orders/list/orderDate?orderDate=07/29/2025",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "49834",
+									"path": [
+										"orders",
+										"list",
+										"orderDate"
+									],
+									"query": [
+										{
+											"key": "orderDate",
+											"value": "07/29/2025"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

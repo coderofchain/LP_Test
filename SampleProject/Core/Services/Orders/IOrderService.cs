@@ -18,5 +18,7 @@ namespace Core.Services.Orders
         void Update(Order order, string customer, string shippingAddress, IEnumerable<Product> orderedProducts);
 
         IEnumerable<Order> GetOrders(string customer = null, string shippingAddress = null);
+
+        Product Create(string name, string description, string sku, decimal? price, ProductTypes type);
     }
 }
