@@ -85,14 +85,24 @@ namespace WebApi.Controllers
             return Found(new ProductData(product));
         }
 
+        // re-test with next request checkin
+        [Route("list")]
+        [HttpGet]
+        public HttpResponseMessage GetProducts()
+        {
+            var products = _productService.GetProducts()
+                                          .Select(p => new ProductData(p))
+                                          .ToList();
+            return Found(products);
+        }
+
         [Route("list/type")]
         [HttpGet]
         public HttpResponseMessage GetProductsByType(string type)
         {
-            int value;
             List<ProductData> products = new List<ProductData>();
 
-            if (int.TryParse(type, out value))
+            if (int.TryParse(type, out int value))
             {
                 products = _productService.GetProducts()
                                .Where(p => ((int)p.Type == (value)))

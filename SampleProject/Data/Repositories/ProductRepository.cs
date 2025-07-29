@@ -26,7 +26,7 @@ namespace Data.Repositories
             var hasFirstParameter = false;
             if (name != null)
             {
-                query = query.Where($"Name:*{name}*");
+                query = query.WhereEquals("Name", name);
                 hasFirstParameter = true;
             }
 

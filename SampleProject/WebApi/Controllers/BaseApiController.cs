@@ -25,5 +25,10 @@ namespace WebApi.Controllers
         {
             return ControllerContext.Request.CreateResponse(HttpStatusCode.Conflict, "A record with the same ID already exists, try using the Update method instead.");
         }
+
+        public HttpResponseMessage InvalidDateFormat()
+        {
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid date format, be sure mm/dd/yyyy is used");
+        }
     }
 }
